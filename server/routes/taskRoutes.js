@@ -51,4 +51,47 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
+//delete task
+router.delete("/:taskId", async (req, res) => {
+
+  try {
+
+    await Task.findByIdAndDelete(req.params.taskId);
+
+    res.status(200).json({
+      message: "Task deleted successfully",
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Failed to delete task",
+    });
+
+  }
+
+});
+
+//TOGGLE COMPLETE TASK
+router.put("/:taskId", async (req, res) => {
+
+  try {
+
+    const task = await Task.findById(req.params.taskId);
+    task.completed = !task.completed;
+    await task.save();
+    res.status(200).json(task);
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Failed to update task",
+    });
+  }
+});
+
 export default router;
