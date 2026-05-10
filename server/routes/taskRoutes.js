@@ -34,8 +34,9 @@ router.get("/:userId", async (req, res) => {
 
   try {
 
-    const tasks = await Task.find({ 
-        user: req.params.userId });
+    const tasks = await Task.find({
+      user: req.params.userId
+    });
 
     res.status(200).json(tasks);
 
@@ -47,7 +48,7 @@ router.get("/:userId", async (req, res) => {
       message: "Failed to fetch tasks",
     });
 
-    }   
+  }
 });
 
 export default router;

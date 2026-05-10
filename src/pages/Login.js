@@ -7,23 +7,23 @@ function Login() {
     password: ""
   });
 
-    const handleChange = (e) => {
+  const handleChange = (e) => {
     setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
+      ...formData,
+      [e.target.name]: e.target.value,
     });
   }
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        const res = await axios.post(
-            "http://localhost:5000/api/auth/login", 
-            formData);
-            localStorage.setItem("token", res.data.token); // Save token to localStorage
-            alert(res.data.message);
-            console.log(res.data); // Log user data to console
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        formData);
+      localStorage.setItem("token", res.data.token); // Save token to localStorage
+      alert(res.data.message);
+      console.log(res.data); // Log user data to console
       // Handle successful login (e.g., save token, redirect to dashboard)
     } catch (error) {
       alert("Login failed");
