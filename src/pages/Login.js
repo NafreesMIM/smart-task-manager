@@ -21,10 +21,25 @@ function Login() {
       const res = await axios.post(
         "http://localhost:5000/api/auth/login",
         formData);
-      localStorage.setItem("token", res.data.token); // Save token to localStorage
+      localStorage.setItem(
+        "token",
+        res.data.token
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(res.data.user)
+      );
+
       alert(res.data.message);
-      console.log(res.data); // Log user data to console
+
+      window.location.href = "/dashboard";
+
+      console.log(res.data); 
+      // Log user data to console
       // Handle successful login (e.g., save token, redirect to dashboard)
+
+      
     } catch (error) {
       alert("Login failed");
       // Handle login error (e.g., show error message)
