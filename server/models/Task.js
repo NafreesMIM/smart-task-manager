@@ -1,21 +1,33 @@
 import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
-    title: String,
+
+    title: {
+        type: String,
+        required: true,
+    },
 
     completed: {
         type: Boolean,
-        default: false
+        default: false,
     },
 
-    user: {
+    priority: {
+        type: String,
+        default: "Medium",
+    },
+
+    dueDate: {
+        type: String,
+    },
+
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
 
 }, {
-    timestamps: true
-
+    timestamps: true,
 });
 
 const Task = mongoose.model("Task", taskSchema);

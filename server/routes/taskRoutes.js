@@ -7,16 +7,23 @@ router.post("/", async (req, res) => {
 
   try {
 
-    const { title, userId } = req.body;
-
-    const task = new Task({
+    const {
       title,
-      user: userId,
+      userId,
+      priority,
+      dueDate,
+    } = req.body;
+
+    const newTask = new Task({
+      title,
+      userId,
+      priority,
+      dueDate,
     });
 
-    await task.save();
+    await newTask.save();
 
-    res.status(201).json(task);
+    res.status(201).json(newTask);
 
   } catch (error) {
 
@@ -35,7 +42,7 @@ router.get("/:userId", async (req, res) => {
   try {
 
     const tasks = await Task.find({
-      user: req.params.userId
+      userId: req.params.userId
     });
 
     res.status(200).json(tasks);
