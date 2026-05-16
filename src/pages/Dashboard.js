@@ -20,6 +20,10 @@ function Dashboard() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editPriority, setEditPriority] = useState("Medium");
+  const [editDueDate, setEditDueDate] = useState("");
 
   const user = JSON.parse(
     localStorage.getItem("user")
@@ -107,18 +111,37 @@ function Dashboard() {
     }
   };
 
+  const openEdit = (task) => {
+    setEditingTask(task._id);
+    setEditTitle(task.title);
+    setEditPriority(task.priority);
+    setEditDueDate(task.dueDate || "");
+  };
+
   //toggle task
   const toggleTask = async (taskId) => {
 
     try {
+
       await axios.put(
-        `https://smart-task-manager-5lyy.onrender.com/api/tasks/${taskId}`,
+        `https://smart-task-manager-5lyy.onrender.com/api/tasks/${editingTask}`,
+        {
+          title: editTitle,
+          priority: editPriority,
+          dueDate: editDueDate,
+        }
       );
 
-      fetchTasks(); // Refresh tasks after toggling
       toast.success("Task updated");
+
+      setEditingTask(null);
+
+      fetchTasks();
+
     } catch (error) {
-      toast.error("Something went wrong");
+
+      toast.error("Failed to update task");
+
     }
 
 
@@ -425,6 +448,13 @@ function Dashboard() {
                       className="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 transition duration-300"
                     >
                       Delete
+                    </button>
+
+                    <button
+                      onClick={() => openEdit(task)}
+                      className="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      Edit
                     </button>
                   </div>
 
