@@ -213,6 +213,26 @@ function Dashboard() {
           Smart Task
         </h1>
 
+        <div className="space-y-4">
+
+          <div className="bg-blue-100 text-blue-700 p-3 rounded-xl font-medium cursor-pointer">
+            Dashboard
+          </div>
+
+          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300">
+            Tasks
+          </div>
+
+          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300">
+            Analytics
+          </div>
+
+          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300">
+            Settings
+          </div>
+
+        </div>
+
       </div>
 
       {/* MAIN */}
@@ -425,6 +445,13 @@ function Dashboard() {
                   className="bg-green-500 text-white px-6 py-3 rounded-xl"
                 >
                   Save
+                </button>
+
+                <button
+                  onClick={() => setEditingTask(null)}
+                  className="bg-gray-500 text-white px-6 py-3 rounded-xl hover:bg-gray-600"
+                >
+                  Cancel
                 </button>
 
               </div>
