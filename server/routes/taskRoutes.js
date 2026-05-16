@@ -82,8 +82,8 @@ router.delete("/:taskId", async (req, res) => {
   }
 });
 
-// UPDATE TASK
-router.put("/:taskId", async (req, res) => {
+// UPDATE TASK DETAILS
+router.put("/edit/:taskId", async (req, res) => {
 
   try {
 
@@ -102,6 +102,32 @@ router.put("/:taskId", async (req, res) => {
     res.status(500).json({
       message: "Failed to update task",
     });
+
+  }
+});
+
+
+// TOGGLE TASK COMPLETE
+router.put("/toggle/:taskId", async (req, res) => {
+
+  try {
+
+    const task = await Task.findById(req.params.taskId);
+
+    task.completed = !task.completed;
+
+    await task.save();
+
+    res.status(200).json(task);
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Failed to toggle task",
+    });
+
   }
 });
 
