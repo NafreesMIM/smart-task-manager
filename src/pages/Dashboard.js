@@ -130,6 +130,11 @@ function Dashboard() {
 
     try {
 
+      if (!editTitle) {
+        toast.error("Task title is required");
+        return;
+      }
+
       await axios.put(
         `${API_BASE}/api/tasks/edit/${editingTask}`,
         {
