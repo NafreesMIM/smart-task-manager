@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "https://smart-task-manager-5lyy.onrender.com";
+
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
@@ -18,9 +20,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "https://smart-task-manager-5lyy.onrender.com/api/auth/login",
-        formData);
+      const res = await axios.post(`${API_BASE}/api/auth/login`, formData);
       localStorage.setItem(
         "token",
         res.data.token

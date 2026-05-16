@@ -45,6 +45,27 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+## Development (Client + Server)
+
+Run the client:
+
+```bash
+npm start
+```
+
+Run the server (from `/server`):
+
+```bash
+cd server
+npm run dev
+```
+
+Run both (root):
+
+```bash
+npm run dev
+```
+
 ### Code Splitting
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)

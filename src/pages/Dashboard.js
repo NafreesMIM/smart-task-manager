@@ -28,11 +28,16 @@ function Dashboard() {
   const [editPriority, setEditPriority] = useState("Medium");
   const [editDueDate, setEditDueDate] = useState("");
 
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem("user") || "null");
+  } catch (e) {
+    user = null;
+  }
 
-  const userId = user?.id;
+  const userId = user?.id || user?._id;
+
+  const API_BASE = process.env.REACT_APP_API_URL || "https://smart-task-manager-5lyy.onrender.com";
 
   // FETCH TASKS
   const fetchTasks = async () => {
@@ -41,9 +46,7 @@ function Dashboard() {
 
       setLoading(true);
 
-      const res = await axios.get(
-        `https://smart-task-manager-5lyy.onrender.com/api/tasks/${userId}`
-      );
+      const res = await axios.get(`${API_BASE}/api/tasks/${userId}`);
 
       setTasks(res.data);
 
@@ -62,7 +65,7 @@ function Dashboard() {
   const logout = () => {
 
     localStorage.removeItem("token");
-
+    localStorage.removeItem("user");
     window.location.href = "/login";
   };
 
@@ -73,15 +76,12 @@ function Dashboard() {
 
     try {
 
-      await axios.post(
-        "https://smart-task-manager-5lyy.onrender.com/api/tasks",
-        {
-          title,
-          userId,
-          priority,
-          dueDate,
-        }
-      );
+      await axios.post(`${API_BASE}/api/tasks`, {
+        title,
+        userId,
+        priority,
+        dueDate,
+      });
 
       setTitle("");
       setPriority("Medium");
@@ -103,9 +103,7 @@ function Dashboard() {
 
     try {
 
-      await axios.delete(
-        `https://smart-task-manager-5lyy.onrender.com/api/tasks/${taskId}`
-      );
+      await axios.delete(`${API_BASE}/api/tasks/${taskId}`);
 
       fetchTasks();
 
@@ -133,7 +131,7 @@ function Dashboard() {
     try {
 
       await axios.put(
-        `https://smart-task-manager-5lyy.onrender.com/api/tasks/edit/${editingTask}`,
+        `${API_BASE}/api/tasks/edit/${editingTask}`,
         {
           title: editTitle,
           priority: editPriority,
@@ -159,9 +157,7 @@ function Dashboard() {
 
     try {
 
-      await axios.put(
-        `https://smart-task-manager-5lyy.onrender.com/api/tasks/toggle/${task._id}`
-      );
+      await axios.put(`${API_BASE}/api/tasks/toggle/${task._id}`);
 
       fetchTasks();
 
