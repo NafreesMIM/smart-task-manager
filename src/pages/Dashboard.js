@@ -481,7 +481,7 @@ function Dashboard() {
 
               <div
                 key={task._id}
-                className="bg-white p-5 rounded-2xl shadow flex flex-col md:flex-row justify-between items-center gap-4"
+                className="bg-white p-5 rounded-2xl shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
               >
 
                 <div>
@@ -506,7 +506,7 @@ function Dashboard() {
                     {
                       task.dueDate && (
                         <span className="text-gray-500">
-                          Due: {task.dueDate}
+                          Due: {new Date(task.dueDate).toLocaleDateString()}
                         </span>
                       )
                     }
@@ -514,7 +514,7 @@ function Dashboard() {
                   </div>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
 
                   <button
                     onClick={() => toggleTask(task)}
