@@ -1,8 +1,11 @@
+// BACKEND - routes/tasks.js
+
 import express from "express";
 import Task from "../models/Task.js";
 
 const router = express.Router();
 
+// CREATE TASK
 router.post("/", async (req, res) => {
 
   try {
@@ -32,17 +35,16 @@ router.post("/", async (req, res) => {
     res.status(500).json({
       message: "Failed to create task",
     });
-
   }
-
 });
 
+// GET TASKS
 router.get("/:userId", async (req, res) => {
 
   try {
 
     const tasks = await Task.find({
-      userId: req.params.userId
+      userId: req.params.userId,
     });
 
     res.status(200).json(tasks);
@@ -54,16 +56,17 @@ router.get("/:userId", async (req, res) => {
     res.status(500).json({
       message: "Failed to fetch tasks",
     });
-
   }
 });
 
-//delete task
+// DELETE TASK
 router.delete("/:taskId", async (req, res) => {
 
   try {
 
-    await Task.findByIdAndDelete(req.params.taskId);
+    await Task.findByIdAndDelete(
+      req.params.taskId
+    );
 
     res.status(200).json({
       message: "Task deleted successfully",
@@ -76,9 +79,7 @@ router.delete("/:taskId", async (req, res) => {
     res.status(500).json({
       message: "Failed to delete task",
     });
-
   }
-
 });
 
 // UPDATE TASK
@@ -101,7 +102,7 @@ router.put("/:taskId", async (req, res) => {
     res.status(500).json({
       message: "Failed to update task",
     });
-
   }
 });
+
 export default router;
