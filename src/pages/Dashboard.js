@@ -36,7 +36,7 @@ function Dashboard() {
       setLoading(true);
 
       const res = await axios.get(
-        `http://localhost:5000/api/tasks/${userId}`
+        `https://smart-task-manager-5lyy.onrender.com/api/tasks/${userId}`
       );
 
       setTasks(res.data);
@@ -70,7 +70,7 @@ function Dashboard() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/tasks",
+        "https://smart-task-manager-5lyy.onrender.com/api/tasks",
         {
           title,
           userId,
@@ -95,7 +95,7 @@ function Dashboard() {
     try {
 
       await axios.delete(
-        `http://localhost:5000/api/tasks/${taskId}`
+        `https://smart-task-manager-5lyy.onrender.com/api/tasks/${taskId}`
       );
 
       fetchTasks(); // Refresh tasks after deletion
@@ -112,7 +112,7 @@ function Dashboard() {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/tasks/${taskId}`,
+        `https://smart-task-manager-5lyy.onrender.com/api/tasks/${taskId}`,
       );
 
       fetchTasks(); // Refresh tasks after toggling

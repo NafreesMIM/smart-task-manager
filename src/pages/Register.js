@@ -19,7 +19,7 @@ function Register() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://smart-task-manager-5lyy.onrender.com/api/auth/register",
         formData);
       alert(res.data.message);
       // Handle successful registration (e.g., redirect to login page)
