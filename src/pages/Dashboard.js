@@ -118,8 +118,7 @@ function Dashboard() {
     setEditDueDate(task.dueDate || "");
   };
 
-  //toggle task
-  const toggleTask = async (taskId) => {
+  const updateTask = async () => {
 
     try {
 
@@ -143,8 +142,26 @@ function Dashboard() {
       toast.error("Failed to update task");
 
     }
+  };
 
+  //toggle task
+  const toggleTask = async (taskId) => {
 
+    try {
+
+      await axios.put(
+        `https://smart-task-manager-5lyy.onrender.com/api/tasks/${taskId}`
+      );
+
+      fetchTasks();
+
+      toast.success("Task updated");
+
+    } catch (error) {
+
+      toast.error("Something went wrong");
+
+    }
   };
 
   useEffect(() => {
@@ -383,6 +400,52 @@ function Dashboard() {
           </div>
 
         </div>
+
+        {
+          editingTask && (
+            <div className="bg-white p-6 rounded-2xl shadow mb-8">
+
+              <h2 className="text-2xl font-semibold mb-4">
+                Edit Task
+              </h2>
+
+              <div className="flex flex-col md:flex-row gap-4">
+
+                <input
+                  type="text"
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                  className="flex-1 border border-gray-300 rounded-xl px-4 py-3"
+                />
+
+                <select
+                  value={editPriority}
+                  onChange={(e) => setEditPriority(e.target.value)}
+                  className="border border-gray-300 rounded-xl px-4 py-3"
+                >
+                  <option>Low</option>
+                  <option>Medium</option>
+                  <option>High</option>
+                </select>
+
+                <input
+                  type="date"
+                  value={editDueDate}
+                  onChange={(e) => setEditDueDate(e.target.value)}
+                  className="border border-gray-300 rounded-xl px-4 py-3"
+                />
+
+                <button
+                  onClick={updateTask}
+                  className="bg-green-500 text-white px-6 py-3 rounded-xl hover:bg-green-600"
+                >
+                  Save
+                </button>
+
+              </div>
+            </div>
+          )
+        }
 
         {/* Tasks List */}
 
