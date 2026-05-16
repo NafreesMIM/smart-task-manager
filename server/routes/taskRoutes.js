@@ -81,15 +81,18 @@ router.delete("/:taskId", async (req, res) => {
 
 });
 
-//TOGGLE COMPLETE TASK
+// UPDATE TASK
 router.put("/:taskId", async (req, res) => {
 
   try {
 
-    const task = await Task.findById(req.params.taskId);
-    task.completed = !task.completed;
-    await task.save();
-    res.status(200).json(task);
+    const updatedTask = await Task.findByIdAndUpdate(
+      req.params.taskId,
+      req.body,
+      { new: true }
+    );
+
+    res.status(200).json(updatedTask);
 
   } catch (error) {
 
@@ -98,7 +101,7 @@ router.put("/:taskId", async (req, res) => {
     res.status(500).json({
       message: "Failed to update task",
     });
+
   }
 });
-
 export default router;
