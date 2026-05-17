@@ -286,19 +286,31 @@ function Dashboard() {
 
         <div className="space-y-4">
 
-          <div className="bg-blue-100 text-blue-700 p-3 rounded-xl font-medium cursor-pointer" onClick={() => navigate("/dashboard")}>
+          <div
+            className="bg-blue-100 text-blue-700 p-3 rounded-xl font-medium cursor-pointer"
+            onClick={() => navigate("/dashboard")}
+          >
             Dashboard
           </div>
 
-          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/tasks")}>
+          <div
+            className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300"
+            onClick={() => toast.info("Tasks page coming soon")}
+          >
             Tasks
           </div>
 
-          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => toast.info("Settings page coming soon")}>
+          <div
+            className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300"
+            onClick={() => navigate("/analytics")}
+          >
             Analytics
           </div>
 
-          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/settings")}>
+          <div
+            className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300"
+            onClick={() => toast.info("Settings page coming soon")}
+          >
             Settings
           </div>
 
