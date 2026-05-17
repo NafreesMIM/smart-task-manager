@@ -23,25 +23,34 @@ function Analytics() {
     const navigate = useNavigate();
 
     const [tasks, setTasks] = useState([]);
+
     const user = JSON.parse(
         localStorage.getItem("user")
     );
-    const userId = user ?.id;
+
+    const userId = user?.id;
+
+    const fetchTasks = async () => {
+        try {
+
+            const res = await axios.get(
+                `${API_BASE}/api/tasks/${userId}`
+            );
+
+            setTasks(res.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+    };
+
     useEffect(() => {
 
         fetchTasks();
 
-    }, []);
-
-    const fetchTasks = async () => {
-        try {
-            const res = await axios.get(`${API_BASE}/api/tasks/${userId}`);
-            setTasks(res.data);
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    }, [userId]);
 
     //TASK STATS
 
