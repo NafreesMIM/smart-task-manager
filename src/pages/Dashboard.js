@@ -247,15 +247,20 @@ function Dashboard() {
 
               <div className="space-y-4">
 
-                <div className="bg-blue-100 text-blue-700 p-3 rounded-xl font-medium cursor-pointer">
+                <div className="bg-blue-100 text-blue-700 p-3 rounded-xl font-medium cursor-pointer" onClick={() => navigate("/dashboard")}>
                   Dashboard
                 </div>
 
-                <div
-                  onClick={() => navigate("/analytics")}
-                  className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300"
-                >
+                <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/tasks")}>
+                  Tasks
+                </div>
+
+                <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/analytics")}>
                   Analytics
+                </div>
+
+                <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/settings")}>
+                  Settings
                 </div>
 
               </div>
@@ -275,7 +280,7 @@ function Dashboard() {
 
         <div className="space-y-4">
 
-          <div className="bg-blue-100 text-blue-700 p-3 rounded-xl font-medium cursor-pointer">
+          <div className="bg-blue-100 text-blue-700 p-3 rounded-xl font-medium cursor-pointer" onClick={() => navigate("/dashboard")}>
             Dashboard
           </div>
 
