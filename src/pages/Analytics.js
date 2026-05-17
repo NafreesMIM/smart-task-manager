@@ -26,7 +26,7 @@ function Analytics() {
     const user = JSON.parse(
         localStorage.getItem("user")
     );
-    const userId = user ? user?.id : null;
+    const userId = user ?.id;
     useEffect(() => {
 
         fetchTasks();
@@ -47,7 +47,7 @@ function Analytics() {
 
     const completedTasks =
         tasks.filter((task) => task.completed).length;
-        
+
     const pendingTasks =
         tasks.filter((task) => !task.completed).length;
 
