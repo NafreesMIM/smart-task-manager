@@ -294,7 +294,7 @@ function Dashboard() {
             Tasks
           </div>
 
-          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/analytics")}>
+          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => toast.info("Settings page coming soon")}>
             Analytics
           </div>
 
