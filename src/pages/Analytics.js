@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
     PieChart,
@@ -17,15 +17,16 @@ import { useNavigate } from "react-router-dom";
 
 
 const API_BASE = process.env.REACT_APP_API_URL || "https://smart-task-manager-5lyy.onrender.com";
-const navigate = useNavigate();
 
 function Analytics() {
+
+    const navigate = useNavigate();
 
     const [tasks, setTasks] = useState([]);
     const user = JSON.parse(
         localStorage.getItem("user")
     );
-    const userId = user ? user?.id;
+    const userId = user ? user?.id : null;
     useEffect(() => {
 
         fetchTasks();
@@ -44,9 +45,9 @@ function Analytics() {
 
     //TASK STATS
 
-    const completedTasks = tasks.filter((task) =>
-        tasks.filter((task) => task.completed).length
-    );
+    const completedTasks =
+        tasks.filter((task) => task.completed).length;
+        
     const pendingTasks =
         tasks.filter((task) => !task.completed).length;
 
