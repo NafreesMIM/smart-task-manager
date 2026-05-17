@@ -7,8 +7,20 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
 
-  console.log(req.body);
   const { name, email, password } = req.body;
+
+  // Validation
+  if (!name || !email || !password) {
+    return res.status(400).json({
+      error: "Please provide name, email, and password",
+    });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).json({
+      error: "Password must be at least 6 characters",
+    });
+  }
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -25,14 +37,26 @@ router.post("/register", async (req, res) => {
       message: "User registered successfully",
     });
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({
+        error: "Email already exists",
+      });
+    }
     res.status(500).json({
-      error: "Registration failed",
+      error: error.message || "Registration failed",
     });
   }
 });
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+
+  // Validation
+  if (!email || !password) {
+    return res.status(400).json({
+      message: "Please provide email and password",
+    });
+  }
 
   try {
 

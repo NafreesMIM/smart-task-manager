@@ -7,6 +7,15 @@ import taskRoutes from "./routes/taskRoutes.js";
 
 dotenv.config();
 
+// Validate required environment variables
+const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
+for (const envVar of requiredEnvVars) {
+  if (!process.env[envVar]) {
+    console.error(`ERROR: Missing required environment variable: ${envVar}`);
+    process.exit(1);
+  }
+}
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 

@@ -34,6 +34,10 @@ function Analytics() {
     const userId = user?.id || user?._id;
 
     const fetchTasks = async () => {
+        if (!userId) {
+            console.warn("User ID not found. Skipping task fetch.");
+            return;
+        }
         try {
 
             const res = await axios.get(

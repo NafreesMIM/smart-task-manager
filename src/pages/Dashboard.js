@@ -47,6 +47,12 @@ function Dashboard() {
   // FETCH TASKS
   const fetchTasks = async () => {
 
+    if (!userId) {
+      toast.error("User not authenticated. Please login.");
+      window.location.href = "/login";
+      return;
+    }
+
     try {
 
       setLoading(true);
