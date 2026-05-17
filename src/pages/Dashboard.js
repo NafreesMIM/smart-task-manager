@@ -1,4 +1,4 @@
-// FRONTEND - Dashboard.js
+//Dashboard.js
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -6,12 +6,15 @@ import {
   FaTasks,
   FaCheckCircle,
   FaClock,
+  FaBars,
+  FaTimes,
 } from "react-icons/fa";
 import {
   ToastContainer,
   toast,
 } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
 
@@ -27,6 +30,7 @@ function Dashboard() {
   const [editTitle, setEditTitle] = useState("");
   const [editPriority, setEditPriority] = useState("Medium");
   const [editDueDate, setEditDueDate] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   let user = null;
   try {
@@ -38,6 +42,7 @@ function Dashboard() {
   const userId = user?.id || user?._id;
 
   const API_BASE = process.env.REACT_APP_API_URL || "https://smart-task-manager-5lyy.onrender.com";
+  const navigate = useNavigate();
 
   // FETCH TASKS
   const fetchTasks = async () => {
@@ -211,6 +216,56 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-100 flex">
 
+      {
+        sidebarOpen && (
+
+          <div className="fixed inset-0 z-50 flex">
+
+            {/* OVERLAY */}
+            <div
+              className="fixed inset-0 bg-black/50"
+              onClick={() => setSidebarOpen(false)}
+            ></div>
+
+            {/* MOBILE SIDEBAR */}
+            <div className="relative w-64 bg-white h-full shadow-lg p-6 z-50">
+
+              <div className="flex justify-between items-center mb-10">
+
+                <h1 className="text-3xl font-bold text-blue-600">
+                  Smart Task
+                </h1>
+
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="text-2xl text-gray-600"
+                >
+                  <FaTimes />
+                </button>
+
+              </div>
+
+              <div className="space-y-4">
+
+                <div className="bg-blue-100 text-blue-700 p-3 rounded-xl font-medium cursor-pointer">
+                  Dashboard
+                </div>
+
+                <div
+                  onClick={() => navigate("/analytics")}
+                  className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300"
+                >
+                  Analytics
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        )
+      }
+
       {/* SIDEBAR */}
       <div className="w-64 bg-white shadow-lg p-6 hidden md:block">
 
@@ -224,15 +279,15 @@ function Dashboard() {
             Dashboard
           </div>
 
-          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300">
+          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/tasks")}>
             Tasks
           </div>
 
-          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300">
+          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/analytics")}>
             Analytics
           </div>
 
-          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300">
+          <div className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300" onClick={() => navigate("/settings")}>
             Settings
           </div>
 
@@ -247,6 +302,13 @@ function Dashboard() {
         <div className="flex justify-between items-center bg-white p-5 rounded-2xl shadow mb-8">
 
           <div>
+
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="md:hidden text-2xl text-gray-700"
+            >
+              <FaBars />
+            </button>
 
             <h1 className="text-3xl font-bold text-gray-800">
               Dashboard
