@@ -25,7 +25,7 @@ function Analytics() {
     const [tasks, setTasks] = useState([]);
 
     const user = JSON.parse(
-        localStorage.getItem("user")
+        localStorage.getItem("user") || "{}"
     );
 
     const userId = user?.id;
@@ -50,7 +50,8 @@ function Analytics() {
 
         fetchTasks();
 
-    }, [userId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     //TASK STATS
 
