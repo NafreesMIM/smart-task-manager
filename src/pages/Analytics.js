@@ -24,11 +24,14 @@ function Analytics() {
 
     const [tasks, setTasks] = useState([]);
 
-    const user = JSON.parse(
-        localStorage.getItem("user") || "{}"
-    );
+    let user = null;
+    try {
+        user = JSON.parse(localStorage.getItem("user") || "null");
+    } catch (e) {
+        user = null;
+    }
 
-    const userId = user?.id;
+    const userId = user?.id || user?._id;
 
     const fetchTasks = async () => {
         try {

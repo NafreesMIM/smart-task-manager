@@ -38,6 +38,54 @@ router.post("/", async (req, res) => {
   }
 });
 
+// UPDATE TASK DETAILS - Must come before generic :taskId route
+router.put("/edit/:taskId", async (req, res) => {
+
+  try {
+
+    const updatedTask = await Task.findByIdAndUpdate(
+      req.params.taskId,
+      req.body,
+      { new: true }
+    );
+
+    res.status(200).json(updatedTask);
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Failed to update task",
+    });
+
+  }
+});
+
+// TOGGLE TASK COMPLETE - Must come before generic :taskId route
+router.put("/toggle/:taskId", async (req, res) => {
+
+  try {
+
+    const task = await Task.findById(req.params.taskId);
+
+    task.completed = !task.completed;
+
+    await task.save();
+
+    res.status(200).json(task);
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Failed to toggle task",
+    });
+
+  }
+});
+
 // GET TASKS
 router.get("/:userId", async (req, res) => {
 
@@ -79,55 +127,6 @@ router.delete("/:taskId", async (req, res) => {
     res.status(500).json({
       message: "Failed to delete task",
     });
-  }
-});
-
-// UPDATE TASK DETAILS
-router.put("/edit/:taskId", async (req, res) => {
-
-  try {
-
-    const updatedTask = await Task.findByIdAndUpdate(
-      req.params.taskId,
-      req.body,
-      { new: true }
-    );
-
-    res.status(200).json(updatedTask);
-
-  } catch (error) {
-
-    console.log(error);
-
-    res.status(500).json({
-      message: "Failed to update task",
-    });
-
-  }
-});
-
-
-// TOGGLE TASK COMPLETE
-router.put("/toggle/:taskId", async (req, res) => {
-
-  try {
-
-    const task = await Task.findById(req.params.taskId);
-
-    task.completed = !task.completed;
-
-    await task.save();
-
-    res.status(200).json(task);
-
-  } catch (error) {
-
-    console.log(error);
-
-    res.status(500).json({
-      message: "Failed to toggle task",
-    });
-
   }
 });
 
