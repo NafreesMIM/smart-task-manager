@@ -101,7 +101,7 @@ smart-task-manager/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/smart-task-manager.git
+git clone https://github.com/NafreesMIM/smart-task-manager.git
 cd smart-task-manager
 ```
 
@@ -222,6 +222,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Author
 
-**Your Name**
 - GitHub: [@NafreesMIM](https://github.com/NafreesMIM)
 - LinkedIn: [nafrees-mim](https://www.linkedin.com/in/nafrees-mim-475b7728a/)
