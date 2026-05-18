@@ -35,7 +35,7 @@ function Analytics() {
 
     const fetchTasks = async () => {
         if (!userId) {
-            console.warn("User ID not found. Skipping task fetch.");
+            navigate("/login", { replace: true });
             return;
         }
         try {

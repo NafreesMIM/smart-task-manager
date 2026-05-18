@@ -49,7 +49,7 @@ function Dashboard() {
 
     if (!userId) {
       toast.error("User not authenticated. Please login.");
-      window.location.href = "/login";
+      navigate("/login", { replace: true });
       return;
     }
 
@@ -74,10 +74,9 @@ function Dashboard() {
 
   // LOGOUT
   const logout = () => {
-
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.href = "/login";
+    navigate("/login", { replace: true });
   };
 
   // ADD TASK
@@ -192,8 +191,8 @@ function Dashboard() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-
-      window.location.href = "/login";
+      navigate("/login", { replace: true });
+      return;
     }
 
     fetchTasks();
