@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// UPDATE TASK DETAILS - Must come before generic :taskId route
+// UPDATE TASK DETAILS 
 router.put("/edit/:taskId", async (req, res) => {
 
   try {
@@ -62,7 +62,7 @@ router.put("/edit/:taskId", async (req, res) => {
   }
 });
 
-// TOGGLE TASK COMPLETE - Must come before generic :taskId route
+// TOGGLE TASK COMPLETE 
 router.put("/toggle/:taskId", async (req, res) => {
 
   try {
