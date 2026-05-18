@@ -294,7 +294,7 @@ function Dashboard() {
 
           <div
             className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300"
-            onClick={() => toast.info("Tasks page coming soon")}
+            onClick={() => navigate("/tasks")}
           >
             Tasks
           </div>
@@ -308,7 +308,7 @@ function Dashboard() {
 
           <div
             className="text-gray-500 p-3 rounded-xl hover:bg-gray-100 cursor-pointer transition duration-300"
-            onClick={() => toast.info("Settings page coming soon")}
+            onClick={() => navigate("/settings")}
           >
             Settings
           </div>
